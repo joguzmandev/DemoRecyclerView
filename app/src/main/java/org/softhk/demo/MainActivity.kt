@@ -4,6 +4,8 @@ import android.content.res.Resources
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.github_user_item.*
 import org.softhk.demo.databinding.ActivityMainBinding
@@ -26,6 +28,13 @@ class MainActivity : AppCompatActivity() {
             adapter = this@MainActivity.adapter
         }
 
+        this.binding.swipe.setOnRefreshListener{
+            this.binding.swipe.isRefreshing = true
+            Handler().postDelayed({
+                this.binding.swipe.isRefreshing = false
+                Toast.makeText(this, "Recycle has been updated", Toast.LENGTH_SHORT).show()
+            }, 5000)
+        }
     }
 
 
