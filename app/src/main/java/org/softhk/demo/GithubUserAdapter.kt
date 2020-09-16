@@ -11,7 +11,7 @@ import org.softhk.demo.databinding.GithubUserItemBinding
 class GithubUserAdapter constructor(private val context:Context) : RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
 
     private val githubUserList:MutableList<GithubUserDummy> by lazy{
-        mutableListOf<GithubUserDummy>()
+        mutableListOf()
     }
 
     fun addGithubUsersList(list:List<GithubUserDummy>){
@@ -35,7 +35,7 @@ class GithubUserAdapter constructor(private val context:Context) : RecyclerView.
             userNameTextView.text = githubUser.username
             occupationTextView.text = githubUser.occupation
         }
-    }
+   }
 
     override fun getItemCount() = githubUserList.size
 
