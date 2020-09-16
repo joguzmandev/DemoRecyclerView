@@ -10,13 +10,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.github_user_item.*
 import org.softhk.demo.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(),GithubUserAdapter.ItemClickListener {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val adapter: GithubUserAdapter by lazy { GithubUserAdapter(this){item->
-        Toast.makeText(this, "Selected Item $item", Toast.LENGTH_SHORT).show()
-    } }
+    private val adapter: GithubUserAdapter by lazy { GithubUserAdapter(this,this) }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -63,10 +61,11 @@ class MainActivity : AppCompatActivity() {
 
             list.add(user)
         }
-
         return list
     }
 
-
+    override fun onItemClicked(itemClicked: GithubUserDummy) {
+        Toast.makeText(this, "$itemClicked", Toast.LENGTH_SHORT).show()
+    }
 }
 

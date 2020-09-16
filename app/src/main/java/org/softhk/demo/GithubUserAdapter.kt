@@ -10,7 +10,7 @@ import org.softhk.demo.databinding.GithubUserItemBinding
 
 class GithubUserAdapter constructor(
     private val context: Context,
-    private val clickListenerLambda: (selectedItem: GithubUserDummy) -> Unit
+    private val clickListenerInterface: ItemClickListener
 ) : RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
 
     private val githubUserList: MutableList<GithubUserDummy> by lazy {
@@ -34,7 +34,7 @@ class GithubUserAdapter constructor(
         val githubUser = githubUserList[position]
 
         holder.itemView.setOnClickListener{
-            clickListenerLambda.invoke(githubUser)
+            clickListenerInterface.onItemClicked(githubUser)
         }
         with(holder.binding) {
             Glide.with(context).load(githubUser.avatar).into(avatarImageView)
@@ -51,5 +51,9 @@ class GithubUserAdapter constructor(
         val binding: GithubUserItemBinding = GithubUserItemBinding.bind(view)
 
 
+    }
+
+    interface ItemClickListener{
+        fun onItemClicked(itemClicked:GithubUserDummy)
     }
 }
