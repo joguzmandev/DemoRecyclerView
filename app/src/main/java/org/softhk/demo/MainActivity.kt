@@ -14,7 +14,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
-    private val adapter: GithubUserAdapter by lazy { GithubUserAdapter(this) }
+    private val adapter: GithubUserAdapter by lazy { GithubUserAdapter(this){item->
+        Toast.makeText(this, "Selected Item $item", Toast.LENGTH_SHORT).show()
+    } }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

@@ -13,6 +13,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/githubuserRecyclerView"
+            android:clipToPadding="false"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:listitem="@layout/github_user_item" />

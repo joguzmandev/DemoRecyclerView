@@ -8,14 +8,17 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import org.softhk.demo.databinding.GithubUserItemBinding
 
-class GithubUserAdapter constructor(private val context:Context) : RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
+class GithubUserAdapter constructor(
+    private val context: Context,
+    private val clickListenerLambda: (selectedItem: GithubUserDummy) -> Unit
+) : RecyclerView.Adapter<GithubUserAdapter.GithubUserViewHolder>() {
 
-    private val githubUserList:MutableList<GithubUserDummy> by lazy{
+    private val githubUserList: MutableList<GithubUserDummy> by lazy {
         mutableListOf()
     }
 
-    fun addGithubUsersList(list:List<GithubUserDummy>){
-        if(githubUserList.isNotEmpty())
+    fun addGithubUsersList(list: List<GithubUserDummy>) {
+        if (githubUserList.isNotEmpty())
             githubUserList.clear()
         this.githubUserList.addAll(list)
         this.notifyDataSetChanged()
@@ -30,12 +33,15 @@ class GithubUserAdapter constructor(private val context:Context) : RecyclerView.
     override fun onBindViewHolder(holder: GithubUserViewHolder, position: Int) {
         val githubUser = githubUserList[position]
 
-        with(holder.binding){
+        holder.itemView.setOnClickListener{
+            clickListenerLambda.invoke(githubUser)
+        }
+        with(holder.binding) {
             Glide.with(context).load(githubUser.avatar).into(avatarImageView)
             userNameTextView.text = githubUser.username
             occupationTextView.text = githubUser.occupation
         }
-   }
+    }
 
     override fun getItemCount() = githubUserList.size
 
